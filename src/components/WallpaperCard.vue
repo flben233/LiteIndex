@@ -45,10 +45,12 @@ export default {
 
 <style scoped>
 #wall {
-  width: 40vw;
   border-radius: 1rem;
+  @media screen and (min-width: 1281px) {
+    width: 40vw;
+  }
   @media screen and (max-width: 1280px) {
-    width: 80vw;
+    width: 90vw;
   }
 }
 </style>

@@ -9,3 +9,7 @@ export function setPaste(text) {
 export function getPaste() {
     return axios.get("/api/paste");
 }
+
+export function deletePaste() {
+  return axios.delete("/api/paste");
+}

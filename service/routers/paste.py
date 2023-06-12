@@ -15,3 +15,10 @@ async def set_paste(text: str = Form()):
     global content
     content = text
     return {"status": "success"}
+
+
+@app.delete("/api/paste")
+async def delete_paste():
+    global content
+    content = ""
+    return {"status": "success"}

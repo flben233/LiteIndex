@@ -5,3 +5,4 @@ ACCESS_TOKEN_EXPIRE_DAYS = 30
 USERNAME = "admin"
 PASSWORD = "admin"
 WEB_ROOT = "../"
+PORT = 18000

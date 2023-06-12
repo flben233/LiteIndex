@@ -4,6 +4,7 @@ import os
 import uvicorn
 from fastapi import FastAPI, Request, Response
 
+from config import PORT
 from internal.auth import auth
 from routers import tabs, login, images, paste, performance
 
@@ -37,4 +38,4 @@ if __name__ == "__main__":
         print("items.json created")
     with open("items.json", "r") as f:
         tabs.items = json.load(f)
-    uvicorn.run(app, host="0.0.0.0", port=8000, access_log=False)
+    uvicorn.run(app, host="0.0.0.0", port=PORT, access_log=False)

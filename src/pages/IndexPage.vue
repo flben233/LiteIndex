@@ -30,7 +30,7 @@
           style="display: flex; flex-flow: column; align-self: center">
         <StatusWatcher style="z-index: 10"/>
         <div id="search-box">
-          <q-input borderless v-model="text" label="剪贴板中转站" @click="isBlur=true" @blur="isBlur=false" @keyup.enter="paste">
+          <q-input clearable borderless v-model="text" label="剪贴板中转站" @click="isBlur=true" @blur="isBlur=false" @keyup.enter="paste" @clear="clrPaste">
             <template v-slot:prepend>
               <q-icon name="content_paste"/>
             </template>
@@ -77,7 +77,7 @@
 import {defineComponent} from 'vue'
 import {getTabs} from "src/api/tabsApi";
 import TabItem from "components/TabItem.vue";
-import {getPaste, setPaste} from "src/api/pasteApi";
+import {deletePaste, getPaste, setPaste} from "src/api/pasteApi";
 import AddTabCard from "components/AddTabCard.vue";
 import DelTabCard from "components/DelTabCard.vue";
 import axios from "axios";
@@ -114,6 +114,15 @@ export default defineComponent({
   methods: {
     paste() {
       setPaste(this.text).then((resp) => {
+        if (resp.data.status === 'success') {
+          this.dialog = true;
+          setTimeout(() => {this.dialog = false}, 2000);
+        }
+      });
+    },
+    clrPaste() {
+      this.text = "";
+      deletePaste().then((resp) => {
         if (resp.data.status === 'success') {
           this.dialog = true;
           setTimeout(() => {this.dialog = false}, 2000);
@@ -178,7 +187,7 @@ export default defineComponent({
   border-radius: 1rem;
 }
 #search-box {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.45);
   border-radius: 5rem;
   padding-left: 3%;
   padding-right: 3%;
@@ -231,7 +240,7 @@ export default defineComponent({
   transition: all 0.2s ease-in-out;
 }
 .icon:hover {
-  transform: scale(1.5);
+  transform: scale(1.3);
   z-index: 2;
 }
 .v-enter-active,

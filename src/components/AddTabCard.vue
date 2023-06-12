@@ -78,10 +78,12 @@ export default {
 <style scoped>
 #dialog {
   border-radius: 1rem;
-  width: 40vw;
   padding: 0.5rem;
+  @media screen and (min-width: 1281px) {
+    width: 40vw;
+  }
   @media screen and (max-width: 1280px) {
-    width: 80vw;
+    width: 90vw;
   }
 }
 </style>
